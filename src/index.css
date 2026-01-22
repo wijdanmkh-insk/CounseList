@@ -1,15 +1,274 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #18230F;
-  --color-secondary: #27391C;
-  --color-tertiary: #255F38;
-  --color-accent: #4C956C;
+  --color-primary: #191A19;
+  --color-secondary: #1E5128;
+  --color-tertiary: #4E9F3D;
+  --color-accent: #D8E9A8;
 }
 
-@layer{
-  body{
-    background-color: var(--color-accent);
-    
-  }
+body{
+  @apply bg-accent px-4 md:px-8 lg:px-16 py-8;
+}
+
+body::before {
+  content: '';
+  @apply fixed inset-0 bg-black/50 backdrop-blur-md opacity-0 invisible transition-all duration-300 pointer-events-none z-40;
+}
+
+body.menu-open::before {
+  @apply opacity-100 visible pointer-events-auto;
+}
+
+.nav {
+  @apply lg:mx-40 sticky top-4 bg-primary text-white py-4 px-6 my-4 rounded-full mt-4 mb-2 z-50;
+}
+
+.nav-wrap {
+  @apply max-w-7xl mx-auto flex items-center justify-between flex-wrap relative;
+}
+
+.nav-left {
+  @apply text-xl font-bold;
+}
+
+.hamburger {
+  @apply flex flex-col gap-1 bg-transparent border-none cursor-pointer p-2 md:hidden;
+}
+
+.hamburger span {
+  @apply w-6 h-0.5 bg-white transition-all;
+}
+
+.hamburger.active span:nth-child(1) {
+  @apply rotate-45 translate-y-1.5;
+}
+
+.hamburger.active span:nth-child(2) {
+  @apply opacity-0;
+}
+
+.hamburger.active span:nth-child(3) {
+  @apply -rotate-45 -translate-y-1.5;
+}
+
+.nav-center {
+  @apply hidden md:flex gap-6 absolute md:relative top-full left-0 right-0 md:top-auto md:left-auto md:right-auto bg-primary md:bg-transparent flex-col md:flex-row p-4 md:p-0 mt-4 md:mt-0 rounded-3xl md:rounded-none;
+}
+
+.nav-center.active {
+  @apply flex w-full mt-6 z-9999;
+}
+
+.nav-center a {
+  @apply text-white no-underline hover:text-accent transition-colors text-center md:text-left;
+}
+
+.nav-right {
+  @apply hidden md:block md:ml-4;
+}
+
+.shortcut {
+  @apply flex gap-1 text-xs items-center justify-center md:hidden mt-4;
+}
+
+.contact-on {
+  @apply bg-transparent text-white px-4 py-2 rounded-full font-semibold border-2 border-white cursor-pointer hover:bg-white hover:text-primary transition-colors mr-4;
+}
+
+.try-now {
+  @apply bg-accent text-primary px-6 py-2 rounded-full font-semibold border-none cursor-pointer hover:bg-tertiary transition-colors;
+}
+
+.hero{
+  @apply relative w-full min-h-screen md:min-h-screen flex items-center justify-center overflow-hidden rounded-3xl -mt-24;
+}
+
+.hero::before {
+  content: '';
+  @apply absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent z-1;
+}
+
+.hero img {
+  @apply w-full h-full object-cover absolute;
+}
+
+.hero-text{
+  @apply absolute left-4 bottom-4 text-4xl md:text-6xl lg:text-8xl lg:bottom-8 font-bold text-white z-10;
+}
+
+.about {
+  @apply w-full min-h-screen flex items-center py-12 md:py-16 lg:py-20;
+}
+
+.about-wrap {
+  @apply max-w-7xl mx-auto flex flex-col md:flex-row gap-8 items-center w-full;
+}
+
+.about-explanation {
+  @apply flex flex-col gap-4 flex-1;
+}
+
+.about-explanation span:first-child {
+  @apply text-3xl md:text-4xl lg:text-6xl font-bold text-primary;
+}
+
+.about-explanation span:last-child {
+  @apply text-base md:text-lg text-primary/80 leading-relaxed text-justify text-wrap;
+}
+
+.about-demo {
+  @apply w-full md:w-1/2 flex items-center justify-center;
+}
+
+.how-to {
+  @apply w-full flex flex-col items-center justify-center py-12 md:py-16 lg:py-20 bg-primary/80;
+}
+
+.how-to-title {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-accent mb-8 md:mb-12;
+}
+
+.how-to-carousel {
+  @apply relative w-full max-w-7xl h-[500px] md:h-[400px] overflow-hidden;
+}
+
+.how-to-item {
+  @apply absolute inset-0 flex flex-col md:flex-row gap-6 md:gap-12 items-center opacity-0 invisible transition-all duration-700 px-4;
+}
+
+.how-to-item.active {
+  @apply opacity-100 visible;
+}
+
+.howto-left {
+  @apply w-full md:w-1/2 flex items-center justify-center;
+}
+
+.howto-left img {
+  @apply w-full h-64 md:h-96 object-cover rounded-3xl;
+}
+
+.howto-right {
+  @apply w-full md:w-1/2 flex flex-col gap-4 text-center md:text-left;
+}
+
+.step-number {
+  @apply text-accent/70 text-sm md:text-base font-semibold uppercase tracking-wide;
+}
+
+.howto-right h3 {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold text-accent;
+}
+
+.howto-right p {
+  @apply text-base md:text-lg text-accent/80 leading-relaxed;
+}
+
+.how-to-controls {
+  @apply flex items-center justify-center gap-6 mt-2;
+}
+
+.control-btn {
+  @apply w-12 h-12 rounded-full bg-accent text-secondary text-2xl font-bold cursor-pointer border-none hover:bg-tertiary transition-colors flex items-center justify-center;
+}
+
+.step-indicators {
+  @apply flex gap-2;
+}
+
+.indicator {
+  @apply w-3 h-3 rounded-full bg-accent/30 cursor-pointer transition-all;
+}
+
+.indicator.active {
+  @apply bg-accent w-8;
+}
+
+.contact {
+  @apply w-full min-h-screen flex items-center justify-center py-12 md:py-16 lg:py-20;
+}
+
+.contact-wrap {
+  @apply max-w-4xl mx-auto flex flex-col items-center text-center gap-6 px-4;
+}
+
+.contact-wrap h1 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-secondary;
+}
+
+.contact-wrap p {
+  @apply text-base md:text-lg text-secondary/80 leading-relaxed;
+}
+
+.contact-btn {
+  @apply bg-secondary text-accent px-8 py-4 rounded-full font-bold text-lg border-none cursor-pointer hover:bg-tertiary transition-colors flex items-center gap-3;
+}
+
+.popup-overlay {
+  @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999];
+}
+
+.popup-content {
+  @apply bg-accent rounded-3xl p-8 md:p-12 max-w-md w-full mx-4 relative shadow-2xl;
+}
+
+.popup-close {
+  @apply absolute top-4 right-4 text-4xl text-primary/50 bg-transparent border-none cursor-pointer hover:text-primary transition-colors leading-none;
+}
+
+.popup-title {
+  @apply text-3xl md:text-4xl font-bold text-primary mb-2;
+}
+
+.popup-subtitle {
+  @apply text-base md:text-lg text-primary/70 mb-8;
+}
+
+.popup-buttons {
+  @apply flex flex-row gap-2 items-center justify-center;
+}
+
+.popup-btn {
+  @apply bg-primary text-accent px-4 py-2 rounded-full font-bold text-sm border-none cursor-pointer hover:bg-secondary transition-colors flex flex-col items-start gap-1;
+}
+
+.popup-btn span {
+  @apply text-sm font-normal text-accent/70;
+}
+
+.popup-btn.signup {
+  @apply bg-secondary hover:bg-tertiary;
+}
+
+.popup-btn.signup.active {
+  @apply bg-tertiary ring-2 ring-accent;
+}
+
+.popup-btn.signin {
+  @apply bg-primary hover:bg-secondary;
+}
+
+.popup-btn.signin.active {
+  @apply bg-secondary ring-2 ring-accent;
+}
+
+.form-group {
+  @apply flex flex-col gap-2 mb-4 text-primary;
+}
+
+.form-group input{
+  @apply w-full px-4 py-2 border-2 border-primary/20 rounded-lg focus:outline-none focus:border-secondary transition-colors;
+}
+
+.submit-btn {
+  @apply bg-secondary text-accent px-6 py-2 rounded-full font-semibold text-lg border-none cursor-pointer hover:bg-tertiary transition-colors flex items-center justify-center ml-auto;
+}
+
+.form-navigation {
+  @apply flex gap-4 justify-between mt-4;
+}
+
+.back-btn {
+  @apply bg-primary/20 text-primary px-6 py-2 rounded-full font-bold text-lg border-none cursor-pointer hover:bg-primary/30 transition-colors;
 }

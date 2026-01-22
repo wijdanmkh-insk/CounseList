@@ -1,7 +1,20 @@
-import {useLocation, Link} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
+import AuthModal from './AuthModal';
 
 export default function Navbar(){
-    const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.classList.add('menu-open');
+        } else {
+            document.body.classList.remove('menu-open');
+        }
+    }, [isMenuOpen]);
+    
     const MENU_NAVBAR =[
         {name: 'About', link: '#about'},
         {name: 'How To Use', link: '#how-to-use'},
@@ -9,25 +22,38 @@ export default function Navbar(){
     ];
 
     return(
-        <nav className="nav">
+        <nav className={`nav ${isMenuOpen ? 'menu-open' : ''}`}>
             <div className="nav-wrap">
                 <div className="nav-left">
                     CounceList
                 </div>
 
-                <div className="nav-center">
+                <button className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div className={`nav-center ${isMenuOpen ? 'active' : ''}`}>
                     {MENU_NAVBAR.map((item, index) => {
-                        const isActive = location.pathname === item.link;
                         return (
-                            <Link key={index} to={item.link} className={isActive ? 'active' : ''}>{item.name}</Link>
+                            <div>
+                                <a key={index} href={item.link} onClick={() => setIsMenuOpen(false)}>{item.name}</a>
+                            </div>
                         );
                     })}
+                    <div className="shortcut">
+                        <button className='contact-on'>Contact on <FontAwesomeIcon icon={faWhatsapp}/></button>
+                        <button className='try-now' onClick={() => setIsPopUpOpen(true)}>Try Now!</button>
+                    </div>
                 </div>
 
                 <div className="nav-right">
-                    <button className="try-now">Try It Now!</button>
+                    <button className="contact-on">Contact on <FontAwesomeIcon icon={faWhatsapp}/></button>
+                    <button className="try-now" onClick={() => setIsPopUpOpen(true)}>Try Now!</button>
                 </div>
             </div>
+            <AuthModal isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} />
         </nav>
     )
 }

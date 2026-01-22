@@ -7,13 +7,9 @@ export default defineConfig({
   plugins: [react(), tailwind()],
   server: {
     host: true, // Expose to network
-    port: 5174,
+    port: 5173,
     hmr: {
-      protocol: 'wss', // Use secure websocket for forwarded ports
-      host: 'localhost',
+      overlay: true,
     },
-    watch: {
-      usePolling: true, // Enable polling for file changes
-    }
   }
 })
