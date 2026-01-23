@@ -18,13 +18,13 @@ export default function SignInForm({ onToggleToSignUp }: SignInFormProps) {
           <label>Password</label>
           <input type="password" placeholder="Enter password" required />
         </div>
-        
-        <button type="submit" className="submit-btn">Sign In</button>
-        
+
         <p className="toggle-text">
           Don't have an account? 
           <span onClick={onToggleToSignUp}> Sign Up</span>
         </p>
+        
+        <button type="submit" className="submit-btn">Sign In</button>
       </form>
     </div>
   );

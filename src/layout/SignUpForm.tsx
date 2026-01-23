@@ -67,7 +67,7 @@ export default function SignUpForm({ onToggleToSignIn }: SignUpFormProps) {
           
           <div className="form-group">
             <label>Sex</label>
-            <select required>
+            <select required className="border-2 p-2 rounded-md">
               <option value="">Select...</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -77,7 +77,7 @@ export default function SignUpForm({ onToggleToSignIn }: SignUpFormProps) {
           
           <div className="form-group">
             <label>Date of Birth</label>
-            <input type="date" required />
+            <input type="date" required className="border-2 p-2 rounded-md" />
           </div>
           
           <div className="form-navigation">
