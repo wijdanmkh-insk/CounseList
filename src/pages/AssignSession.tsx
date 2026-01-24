@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSignal, faLocationDot} from '@fortawesome/free-solid-svg-icons';
 import BottomNavbar from '../layout/BottomNavbar';
 
 interface Counselor {
@@ -95,9 +93,16 @@ export default function AssignSession() {
       return;
     }
 
+    // Guard: skip filtering if location is not selected
+    if (formData.location === '') {
+      setAvailableCounselors([]);
+      setShowResults(true);
+      return;
+    }
+
     const available = COUNSELORS.filter(counselor => {
       // Check if counselor supports the selected location
-      if (!counselor.location.includes(formData.location)) {
+      if (!counselor.location.includes(formData.location as 'online' | 'offline')) {
         return false;
       }
 

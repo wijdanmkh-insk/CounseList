@@ -20,7 +20,6 @@ export default function BottomNavbar() {
   const NAV_ITEMS = [
     { id: 'schedules', icon: faCalendarDays, label: 'Schedules', path: '/home' },
     { id: 'assign', icon: faPlus, label: 'Assign Session', path: '/assign' },
-    { id: 'feedback', icon: faCommentDots, label: 'Feedback', path: '/feedback' },
     { id: 'logout', icon: faRightFromBracket, label: 'Logout', path: '/' }
   ];
 
